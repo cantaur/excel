@@ -17,13 +17,13 @@ public class MemberServiceImpl implements MemberService {
         this.memberMapper = memberMapper;
     }
 
+
     @Override
     public void insertMember(MemberDTO memberDTO) throws Exception {
+        if(memberMapper.selectMemberCount(memberDTO.getEmail()) > 0){
+            throw new Exception();
+        }
         memberMapper.insertMember(memberDTO);
-
     }
-
-
-
 
 }

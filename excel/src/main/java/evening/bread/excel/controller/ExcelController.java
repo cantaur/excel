@@ -29,12 +29,19 @@ public class ExcelController {
 
 
 
-
+    /**
+     * method POST
+     * excel 파일 db insert
+     * @param file
+     * @return List<MemberExcelDTO>
+     * @throws Exception
+     */
     @PostMapping("/excel/upload")
     public List<MemberExcelDTO> readExcel(@RequestParam("file") MultipartFile file)
             throws Exception {
 
         List<MemberExcelDTO> memberExcelDTOList = excelService.selectMemberExcel(file);
+        //리스트의 갯수만큼 DB에 insert 시행
         for(MemberExcelDTO memberExcelDTO: memberExcelDTOList){
             MemberDTO memberDTO = new MemberDTO();
             memberDTO.setName(memberExcelDTO.getEmail());
