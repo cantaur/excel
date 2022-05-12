@@ -20,10 +20,11 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void insertMember(MemberDTO memberDTO) throws Exception {
-        if(memberMapper.selectMemberCount(memberDTO.getEmail()) > 0){
-            throw new Exception();
+        //db 조회해서 존재하지 않을 때 insert
+        if(memberMapper.selectMemberCount(memberDTO.getEmail()) == 0){
+            memberMapper.insertMember(memberDTO);
         }
-        memberMapper.insertMember(memberDTO);
+
     }
 
 }

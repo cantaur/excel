@@ -44,7 +44,7 @@ public class ExcelController {
         //리스트의 갯수만큼 DB에 insert 시행
         for(MemberExcelDTO memberExcelDTO: memberExcelDTOList){
             MemberDTO memberDTO = new MemberDTO();
-            memberDTO.setName(memberExcelDTO.getEmail());
+            memberDTO.setName(memberExcelDTO.getName());
             memberDTO.setEmail(memberExcelDTO.getEmail());
             memberService.insertMember(memberDTO);
         }
