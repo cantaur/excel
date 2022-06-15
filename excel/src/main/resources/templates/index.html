@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<body>
+
+<div>
+    <h3>
+        엑셀 다운로드하기
+    </h3>
+    <form action="/excel/download" method="get">
+        <button type="submit">Excel</button>
+    </form>
+</div>
+
+<h3>
+    엑셀 업로드하고 DB에 insert하기
+</h3>
+<form id="upload-file-form">
+    <input type="file" th:name="file">
+    <input th:type="button" onclick="uploadFile()" id="uploadBtn" value="제출" />
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">이름</th>
+            <th scope="col">이메일</th>
+        </tr>
+    </thead>
+    <div>
+        <tbody id="tableBody">
+
+        </tbody>
+    </div>
+
+</table>
+
+
+</body>
+<script>
+
+
+    function uploadFile(){
+
+        var form = $('#upload-file-form')[0];
+        var formData = new FormData(form);
+
+        $.ajax({
+            url : '/excel/upload',
+            type : 'POST',
+            data : formData,
+            contentType : false,
+            processData : false
+        }).done(function(datas){
+            var table = document.getElementById('tableBody');
+            var tags = '';
+            for (var i = 0; i < datas.length; i += 1) {
+                tags += tableRender(datas[i]);
+            }
+            table.innerHTML = tags;
+        });
+    }
+    function tableRender(data) {
+        return '<tr><td>'+data.num+'</td><td>'+data.name+'</td><td>'+data.email+'</td><td></tr>';
+    }
+
+
+</script>
+</html>
