@@ -6,9 +6,15 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface MemberMapper {
-    void insertMember(MemberDTO memberDTO) throws DataAccessException;
     int selectMemberCount(@Param("email") String email) throws DataAccessException;
+
+    List<MemberDTO> selectMemberAll() throws DataAccessException;
+
+    void insertMember(MemberDTO memberDTO) throws DataAccessException;
+
 }

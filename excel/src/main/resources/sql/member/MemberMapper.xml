@@ -12,6 +12,13 @@
 
     </select>
 
+    <select id="selectMemberAll" resultType="MemberDTO">
+        SELECT
+            *
+        FROM
+            member
+    </select>
+
 
     <insert id="insertMember" parameterType="MemberDTO" useGeneratedKeys="true" keyProperty="memberUid">
         INSERT INTO member (

@@ -12,10 +12,10 @@ import javax.sql.DataSource;
 
 @Configuration
 @PropertySource("classpath:/application.yml")
-public class DataSourceConfig {
+public class HomeworkDataSourceConfig {
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
+    @ConfigurationProperties(prefix = "spring.member-datasource")
     public DataSource dataSource() {
         org.apache.tomcat.jdbc.pool.DataSource datasource =  DataSourceBuilder.create().type(org.apache.tomcat.jdbc.pool.DataSource.class).build();
         datasource.setValidationQuery("/* ping */ SELECT 1");

@@ -19,8 +19,17 @@ import java.util.List;
 @Slf4j
 public class ExcelServiceImpl implements ExcelService {
 
+//    private ExcelUtil excelUtil;
 
-    private Sheet excelProcess(MultipartFile file) throws Exception{
+//    @Autowired
+//    public ExcelServiceImpl(ExcelUtil excelUtil){
+//        this.excelUtil = excelUtil;
+//    }
+
+
+
+
+    private Sheet excelUploadProcess(MultipartFile file) throws Exception{
         //확장자 검사 commons.io 라이브러리의 확장자를 얻어오는 FilenameUtils 클래스를 통해 엑셀 확장자 여부 판단
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         if (!extension.equals("xlsx") && !extension.equals("xls")) {
@@ -40,9 +49,11 @@ public class ExcelServiceImpl implements ExcelService {
     }
 
 
+
+
     @Override
     public List<MemberExcelDTO> selectMemberExcel(MultipartFile file) throws Exception{
-        Sheet worksheet = this.excelProcess(file);
+        Sheet worksheet = this.excelUploadProcess(file);
 
         List<MemberExcelDTO> memberExcelDTOList = new ArrayList<>();
         for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
